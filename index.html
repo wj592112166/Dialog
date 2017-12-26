@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" type="" href="css/style.css">
+
+<body>
+    <div class="btn">点击显示弹窗</div>
+    <div class="btn1">点击显示自动消失的弹窗</div>
+    <div class="btn2">点击显示可以拖拽的弹窗</div>
+</body>
+<script src="js/dialog.js"></script>
+<script>
+    var btn = document.querySelector('.btn');
+    var btn1 = document.querySelector('.btn1');
+    var btn2 = document.querySelector('.btn2');
+    var obj = {
+        height: 150,
+        background: 'rgba(0,0,0,.7)',
+        title: '确定弹窗',
+        btn: ['确定', '取消'],
+        sure: function() {
+            alert('Dialog');
+        },
+        close: function() {
+            alert('Dialog');
+        }
+    }
+    btn.onclick = function() {
+        new Dialog(obj);
+    }
+
+    btn1.onclick = function() {
+        var a = new DialogAuto({
+            title: '自动消失',
+            sure: function() {
+                document.body.removeChild(document.querySelector('.dialog'));
+                document.body.removeChild(document.querySelector('.mark'));
+                clearTimeout(a.timer);
+            }
+        });
+    }
+
+    btn2.onclick = function() {
+        new DialogDrap({
+            title: '拖拽弹窗',
+            width: 300,
+            height: 150,
+            background: '#CF4B4B'
+        });
+    }
+</script>
+
+</html>
